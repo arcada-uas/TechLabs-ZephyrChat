@@ -5,20 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ollama Zephyr 7B</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>Chat with Zephyr</h1>
-    <p>This is a local implementation of the Zephyr 7B model.<br>
-        Feel free to ask it questions about life and death</p>
+    <p>This is a local implementation of the <a href="https://huggingface.co/HuggingFaceH4/zephyr-7b-beta" target="_blank">Zephyr 7B Model</a><br>
+        Zephyr in turn is an improvement of the Mistral 7B model by <a href="https://mistral.ai/" target="_blank">Mistral AI</a>.<br>
+        The model (as well as the Mistral model) is released under the Apache 2.0 license</p>
     <p>The model runs locally on a computer in F3, and I'm not logging anything.</p>
     <p>If there is a problem with the implementation, contact bistromd@arcada.fi<br>
-        If you want to contribute</p>
+        If you want to contribute you can find the code <a href="https://github.com/arcada-uas/TechLabs-ZephyrChat" target="_blank">here</a></p>
     <input id="query" type="text" size="50">
     <button id="send">Send</button>
     <p id="question"></p>
     <p id="out">
     </p>
+    <p>Made with love by Dennis B <br>
+        Wanna try or compare LLMs?<br>Head on over to <a href="https://arena.lmsys.org/" target="_blank">https://arena.lmsys.org/</a></p>
 </body>
 
 </html>
@@ -29,7 +33,7 @@
         document.querySelector("#question").innerText = "LOADING..."; // Empty response box before next response
         // console.log("Query:" + query); // Debug
         // Send message to API
-        const response = await fetch("http://localhost:11434/api/generate", {
+        const response = await fetch("http://193.167.37.245:11434/api/generate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ "model": "zephyr", "prompt": query })
