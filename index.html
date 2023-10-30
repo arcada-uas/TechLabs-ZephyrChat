@@ -16,9 +16,9 @@
         If you want to contribute</p>
     <input id="query" type="text" size="50">
     <button id="send">Send</button>
-    <p>Reply:</p>
-    <div id="out">
-    </div>
+    <p id="question"></p>
+    <p id="out">
+    </p>
 </body>
 
 </html>
@@ -26,8 +26,8 @@
     async function sendQuery() {
         // Grab query from input box
         const query = document.querySelector("#query").value;
-        document.querySelector("#out").innerText = ""; // Empty response box before next response
-        console.log("Query:" + query); // Debug
+        document.querySelector("#question").innerText = "LOADING..."; // Empty response box before next response
+        // console.log("Query:" + query); // Debug
         // Send message to API
         const response = await fetch("http://localhost:11434/api/generate", {
             method: "POST",
@@ -38,28 +38,25 @@
         // Iterate response.body (a ReadableStream) asynchronously
         const chunks = [];
         for await (const chunk of response.body) {
+            // Empty response box as soon as first chunk arrives.
+            if (document.querySelector("#question").innerText == "LOADING...") {
+                document.querySelector("#question").innerText = "Query: " + query;
+                document.querySelector("#out").innerText = "Reply: ";
+            } 
             // Do something with each chunk
-            let res = await new Response(chunk).text() // Uint8Array stream to text through Response Obj
-            // To-Do - use exec() to pattern match instead of split
-            
-            res = "[" + res + "]";
-            // res = res.replace('"\n"',"<br>"); // Find newlines in response and convert to breaks.
+            let res = await new Response(chunk).text() // Uint8Array stream to text through Response Obj          
+            res = "[" + res + "]"; // Reformat bad json output of model
+            res = res.replace('"\n"', "<br>");  // Model outputs newlines, turn them into html breaks.
             res = res.replaceAll("\n", ","); // Find newlines that ollama adds at the end of each line of json, remove them
-            res = res.replace("},]", "}]");
-            res = res.replace('"\n"', "<br>");
-            //console.log(res);
-            // const pattern = /'"response":"' wanted string '","'/;
-            // pattern.exec("The best things in life are free!");
-            resJson = JSON.parse(res); // Compare console output and youll see
+            res = res.replace("},]", "}]"); // Remove comma from final object in multiple lines of objects
+            resJson = JSON.parse(res); // Parse model output into json array of objects
             resJson.forEach(element => {
-                console.log(element.response);
-                document.querySelector("#out").innerText += element.response;
-            }); 
-            
-            // resArr = res.split('"response":"')[1].split('","')[0]; // Keeps up but strings are sometimes three lines long
-            
+                // console.log(element.response); // Debug
+                document.querySelector("#out").innerText += element.response; // Add response to html
+            });             
         }
     }
-    // Listen for sent queries
+    // Listen for klick on send button or enter key
     document.querySelector("#send").addEventListener("click", sendQuery);
+    document.querySelector("#query").addEventListener("keydown", function (e) { if (13 == e.keyCode) { sendQuery() } });
 </script>
