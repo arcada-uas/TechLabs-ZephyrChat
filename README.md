@@ -1,6 +1,3 @@
-# ZephyrChat
-Chat with the Zephyr 7B LLM Model
-
 ## Local Zephyr API
 This is a local implementation of the Zephyr 7B model.
 [https://ollama.ai/library/zephyr](https://ollama.ai/library/zephyr)
@@ -40,5 +37,8 @@ curl -X POST http://localhost:11434/api/generate -d '{
 I built a simple front end with a text box and a send button where the reply is printed out underneath the prompt field.
 
 If you want to contribute, please help me improve the front end.
+The front end code can be found here:
+[https://github.com/arcada-uas/TechLabs-ZephyrChat](https://github.com/arcada-uas/TechLabs-ZephyrChat)
+
 
 
