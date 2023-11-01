@@ -55,16 +55,15 @@
         document.querySelector("#question").innerText = query;
         document.querySelector("#out").innerText = "LOADING..."; // Empty response box before next response
         // console.log("Query:" + query); // Debug
-        // Send message to API
-        const response = await fetch("http://localhost:11434/api/generate", {
+        // Send request to middeware Express API
+        const res = await fetch("https://chat.techlabs.fi/api/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ "model": "zephyr", "prompt": query })
+            body: JSON.stringify({ "question": query })
         });
-
+        
         // Iterate response.body (a ReadableStream) asynchronously
-        const chunks = [];
-        for await (const chunk of response.body) {
+        for await (const chunk of res.body) {
             // Empty response box as soon as first chunk arrives.
             if (document.querySelector("#out").innerText == "LOADING...") {
                 document.querySelector("#out").innerText = "";
@@ -72,7 +71,7 @@
             // Do something with each chunk
             let res = await new Response(chunk).text() // Uint8Array stream to text through Response Obj          
             res = "[" + res + "]"; // Reformat bad json output of model
-            res = res.replace('"\n"', "<br>");  // Model outputs newlines, turn them into html breaks.
+            res = res.replaceAll('\"\n\"', "<br>");  // Model outputs newlines, turn them into html breaks.
             res = res.replaceAll("\n", ","); // Find newlines that ollama adds at the end of each line of json, remove them
             res = res.replace("},]", "}]"); // Remove comma from final object in multiple lines of objects
             resJson = JSON.parse(res); // Parse model output into json array of objects

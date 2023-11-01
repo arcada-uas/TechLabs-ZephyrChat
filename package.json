@@ -1,0 +1,14 @@
+{
+    "name": "express-middleware-api",
+    "version": "1.0.0",
+    "description": "Fetches content from http backend and serves it to https frontend",
+    "main": "index.js",
+    "scripts": {
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
+  
