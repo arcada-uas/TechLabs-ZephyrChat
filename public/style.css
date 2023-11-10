@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     background-position: center;
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-image: url("./img/bg.svg");
     -ms-overflow-style: none;
     scrollbar-width: none;
