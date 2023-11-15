@@ -15,25 +15,12 @@ body {
     padding-right: 20px;
     max-width: 700px;
     margin: auto;
-    min-height: 80vh;
+    min-height: 60vh;
 }
 
 strong {
     display: none;
 }
-
-/*
-#query,
-button {
-    padding: 10px;
-    font-size: medium;
-    width: 80vw;
-    display: block;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    max-width: 700px;
-}
-*/
 
 h1 {
     font-size: 2rem;
@@ -46,47 +33,22 @@ p {
 }
 
 /* Banner container */
-.css-1qye2b6 {
+.banner-container {
     height: 10rem;
-}
-
-/* Banner */
-.css-1nm2s1n {
-    width: 100%;
-    height: 10rem;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
 }
 
 /* Logo */
-.css-12zfstf {
+.logo {
     width: 6.5rem;
     margin-left: 1.5rem;
     margin-top: 1.4rem;
 }
 
-/* Footer div */
-.css-1lzs13d {
-    position: relative;
-    width: 100%;
+footer {
+    margin-top: auto;
 }
 
-/* Bottom banner */
-.css-3tfkh9 {
-    width: 100%;
-    height: 10rem;
-    position: relative;
-    z-index: -1;
-    display: block;
-}
-
-/* Footer */
-.css-10kaj6o {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 1rem;
+.container {
+    padding: 1rem 0;
     font-size: 0.8rem;
 }
