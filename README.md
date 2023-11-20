@@ -1,3 +1,5 @@
+*! Note that branch openai is currently ahead of main !*
+
 ## Local Zephyr API
 This is a local implementation of the Zephyr 7B model.
 [https://ollama.ai/library/zephyr](https://ollama.ai/library/zephyr)
