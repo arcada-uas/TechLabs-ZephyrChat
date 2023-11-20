@@ -1,14 +1,13 @@
 {
     "name": "express-middleware-api",
     "version": "1.0.0",
-    "description": "Fetches content from http backend and serves it to https frontend",
+    "description": "Fetches content from http backend and serves it to https frontend, now also acts as OpenAI middleware",
     "main": "index.js",
-    "scripts": {
-    },
+    "scripts": {},
     "author": "",
     "license": "ISC",
     "dependencies": {
-      "express": "^4.18.2"
+        "express": "^4.18.2",
+        "openai": "^4.19.0"
     }
-  }
-  
+}

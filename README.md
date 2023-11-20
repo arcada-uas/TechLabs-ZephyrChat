@@ -31,6 +31,29 @@ npm install # inside repo folder where package.json is
 node index.js
 ``
 
+**Configuration files required**
+There's an apikey.js file in the root of the app containing the API key.
+You also need the fullchain.pem and the privkey.pem to enable ssh.
+
+**Configuring pm2 to start express on boot**
+``
+npm install pm2
+pm2 start index.js
+sudo pm2 startup systemd
+pm2 save
+``
+
+Optional if you already run Apache: *sudo systemctl disable apache2*
+Reboot and check if pm2 started: *systemctl status pm2*
+I had some issues with systemd not finding pm2, needed to add pm2 to startup
+`` sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u bistromd --hp /home/bistromd ``
+
+**Adding OpenAI API support in Node**
+``
+npm install --save openai
+export OPENAI_API_KEY='your-secret-key'
+``
+
 **Fetching SSL Certs**
 Config your DNS to point to the server ip
 ``
@@ -66,7 +89,7 @@ You can check the ollama docs how to run it as a service:
 [https://github.com/jmorganca/ollama/blob/main/docs/faq.md](https://github.com/jmorganca/ollama/blob/main/docs/faq.md)
 
 **To-Do**
-[] Reconfigure middleware to start as a service on boot.
+[x] Reconfigure middleware to start as a service on boot.
 [] Write instructions on how to do it in documenation
 
 ### Front-end
